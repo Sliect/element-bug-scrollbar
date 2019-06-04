@@ -39,8 +39,19 @@ export default {
     resize(wrap, (val, oldVal) => {
       var height = val.height
       var oldHeight = oldVal.height
-      thumb.style.height = height / oldHeight * parseFloat(thumb.style.height) + '%'
-      thumb.style.transform = `translateY(${wrap.scrollTop / wrap.offsetHeight * 100}%)`
+      var wrapOffsetHeight = wrap.offsetHeight
+      var wrapScrollHeight = wrap.scrollHeight
+      // 新的滚动条高度，值为百分之
+      // 处理滚动条从无到有的过度，防止出现NaN
+      var thumbHeight = height / oldHeight * parseFloat(thumb.style.height || '0')
+      // 从有滚动条到无滚动条
+      var heightPer = thumbHeight >= 100 ? '0' : thumbHeight + '%'
+      // 从无滚动条到有滚动条
+      if (wrapOffsetHeight < wrapScrollHeight) {
+        heightPer = wrapOffsetHeight / wrapScrollHeight * 100 + '%'
+      }
+      thumb.style.height = heightPer
+      thumb.style.transform = `translateY(${wrap.scrollTop / wrapOffsetHeight * 100}%)`
     })
   }
 }

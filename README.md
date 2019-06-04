@@ -29,4 +29,11 @@ this.resize(wrap, (val, oldVal) => {
 })
 ```
 
+### 修复滚动条高度不会随wrap的尺寸变化而变化
 ![mod](./mod.gif)
+
+### 修复滚动条从无到有
+![fix](./fix.gif)
+
+### 修复滚动条从有到无
+![fix2](./fix2.gif)
