@@ -21,7 +21,7 @@ export default {
   name: 'app',
   computed: {
     list() {
-      return Array.from({length: 20}).map((item, idx) => `item ${idx}`)
+      return Array.from({length: 200}).map((item, idx) => `item ${idx}`)
     }
   },
   directives: {
