@@ -1,13 +1,20 @@
 # element-bug-scrollbar
 外层包裹元素尺寸变化后，滑动轨道与期待不符
 
+## 重现步骤
+将指令注释可重现bug，添加指令可查看解决方案的效果
+
 npm i & npm run serve
+
 将滚动条滑倒底部,缩放浏览器
+
 放大 el-scrollbar 元素的高度会导致滑块无法滚动到底部
+
 缩小 el-scrollbar 元素的高度会导致滑块滑倒底部时部分不可见
 
 ![bug](./bug.gif)
 
+## 解决方案
 ``` js
 var wrap = document.querySelector('.el-scrollbar__wrap')
 var thumb = document.querySelector('.el-scrollbar__thumb')
