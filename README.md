@@ -15,18 +15,29 @@ npm i & npm run serve
 ![bug](./bug.gif)
 
 ## 解决方案
+纵向滚动条
 ``` js
 var wrap = document.querySelector('.el-scrollbar__wrap')
 var thumb = document.querySelector('.el-scrollbar__thumb')
 var percent = wrap.scrollTop / wrap.offsetHeight * 100 + '%'
 // 通过 `translateY(${percent})` 来控制滑块的位置，但是缩放 wrap 并不会改变滑块的高度，所以才会导致该bug
-// 解决办法也很简单，监听 wrap 的尺寸变化，获得 wrap 高度改变的比例，同比放大滑块高度并重新计算 transform 位置即可。横向滚动条同理
+// 解决办法也很简单，监听 wrap 的尺寸变化，获得 wrap 高度改变的比例，同比放大滑块高度并重新计算 transform 位置即可。
 this.resize(wrap, (val, oldVal) => {
   var height = val.height
   var oldHeight = oldVal.height
   thumb.style.height = height / oldHeight * parseFloat(thumb.style.height) + '%'
   thumb.style.transform = `translateY(${wrap.scrollTop / wrap.offsetHeight * 100}%)`
 })
+```
+
+横向滚动条添加元素时尺寸变化添加样式，注意子项必须也是inline-block样式
+resize bug
+``` css
+.el-scrollbar__view {
+  display: inline-block;
+  min-width: 100%;
+  white-space: nowrap;
+}
 ```
 
 ### 修复滚动条高度不会随wrap的尺寸变化而变化
